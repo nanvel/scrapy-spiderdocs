@@ -6,7 +6,7 @@ Usage example
 
 .. code-block:: bash
 
-    pip install git+https://github.com/nanvel/scrapy-spiderdocs.git
+    pip install scrapy-spiderdocs
     scrapy spiderdocs <module.name>
 
 Example project
@@ -63,7 +63,7 @@ Execute the command:
 
 Output:
 
-.. code-block:: md
+.. code-block::
 
     # documented.spiders spiders
     
@@ -122,7 +122,7 @@ Docstring syntax
 
 Use ``;`` to create sections. For example:
 
-.. code-block:: text
+.. code-block::
 
     ; Section 1
 
@@ -134,7 +134,7 @@ Use ``;`` to create sections. For example:
 
 Use ``; end`` to close a section:
 
-.. code-block:: text
+.. code-block::
 
     This text will not be added to the documentation.
 
@@ -167,7 +167,7 @@ An example:
 
 will be translated into:
 
-.. code-block:: md
+.. code-block::
 
     ### Output
     
@@ -203,4 +203,4 @@ Development
 TODO
 ----
 
-- unittests
+unittests

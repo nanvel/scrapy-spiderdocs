@@ -36,7 +36,7 @@ def file_content(file_name):
 
 setup(
     name='scrapy-spiderdocs',
-    version='0.0.3',
+    version='0.0.4',
     description="Generate spiders md documentation based on spider docstrings.",
     long_description=file_content('README.md'),
     license="The MIT License",

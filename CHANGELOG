@@ -3,8 +3,11 @@ v 0.0.1
 - initial
 ---
 v 0.0.2
-- added long description to setup.py.
+- added long description to setup.py
 - added CHANGELOG
 ---
 v 0.0.3
 README.md -> README.rst
+---
+v 0.0.4
+README.rst fixes to show properly on PyPI
