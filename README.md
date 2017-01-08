@@ -7,7 +7,9 @@ pip install git+https://github.com/nanvel/scrapy-spiderdocs.git
 scrapy spiderdocs <module.name>
 ```
 
-See documented project for example.
+## Example project
+
+See `documented` project for example.
 
 ```python
 # -*- coding: utf-8 -*-
@@ -75,11 +77,6 @@ Output:
         "1": 1
     }
     ```
-
-Run the example spider:
-```bash
-scrapy crawl example
-```
 
 ## Output options
 
@@ -161,6 +158,13 @@ will be translated into:
         "attr": "value"
     }
     ```
+
+## Scrapy settings
+
+`SPIDERDOCS_LOCATIONS: {<module>: <destination>}`, default: `{}`.
+`SPIDERDOCS_SECTION_PROCESSORS: {<section_name>: <function>}`, default: `{}`.
+
+See usage examples above.
 
 ## Development
 
