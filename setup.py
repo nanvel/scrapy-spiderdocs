@@ -22,13 +22,23 @@ For more information on creating source distributions, see
 http://docs.python.org/2/distutils/sourcedist.html
 """
 
+import os.path
+
 from setuptools import setup, find_packages
+
+
+def file_content(file_name):
+    try:
+        return open(os.path.join(os.path.dirname(__file__), file_name)).read()
+    except IOError:
+        return ''
 
 
 setup(
     name='scrapy-spiderdocs',
-    version='0.0.1',
+    version='0.0.2',
     description="Generate spiders md documentation based on spider docstrings.",
+    long_description=file_content('README.md'),
     license="The MIT License",
     platforms=['OS Independent'],
     keywords='scrapy, spiders, documentation',
