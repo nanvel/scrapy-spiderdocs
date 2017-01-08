@@ -96,7 +96,7 @@ scrapy spiderdocs <module.name> -o somefile.md
 
 ```python
 SPIDERDOCS_LOCATIONS = {
-    'module.name': "somfile.md"
+    'module.name': "somefile.md"
 }
 ```
 
@@ -162,6 +162,7 @@ will be translated into:
 ## Scrapy settings
 
 `SPIDERDOCS_LOCATIONS: {<module>: <destination>}`, default: `{}`.
+
 `SPIDERDOCS_SECTION_PROCESSORS: {<section_name>: <function>}`, default: `{}`.
 
 See usage examples above.
