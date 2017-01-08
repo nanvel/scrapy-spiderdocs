@@ -2,8 +2,8 @@
 
 ## Usage example
 
-```text
-install scrapy-spiderdocs using pip
+```bash
+pip install git+https://github.com/nanvel/scrapy-spiderdocs.git
 scrapy spiderdocs <module.name> -o <filename.md> 
 ```
 

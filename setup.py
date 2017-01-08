@@ -44,7 +44,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'scrapy.commands': [
-            'spiderdocs=documented.commands:Command',
+            'spiderdocs=documented.commands.spiderdocs:Command',
         ],
     },
 )
