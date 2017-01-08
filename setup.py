@@ -36,7 +36,7 @@ setup(
     version='0.0.1',
     description="Generate spiders md documentation based on spider docstrings.",
     license="The MIT License",
-    platforms=('OS Independent',),
+    platforms=['OS Independent'],
     keywords='scrapy, spiders, documentation',
     author='Oleksandr Polieno',
     author_email='polyenoom@gmail.com',
@@ -47,4 +47,5 @@ setup(
             'spiderdocs=documented.commands.spiderdocs:Command',
         ],
     },
+    install_requires=['scrapy>=1.0']
 )

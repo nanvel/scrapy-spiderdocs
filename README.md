@@ -174,7 +174,7 @@ git clone git@github.com:nanvel/scrapy-spiderdocs.git
 cd scrapy-spiderdocs
 virtualenv .env --no-site-packages -p /usr/local/bin/python3
 source .env/bin/activate
-pip install -r requirements.txt
+pip install scrapy
 scrapy crawl example
 scrapy spiderdocs documented.spiders
 python -m unittest documented.tests
