@@ -4,7 +4,7 @@
 
 ```bash
 pip install git+https://github.com/nanvel/scrapy-spiderdocs.git
-scrapy spiderdocs <module.name> -o <filename.md> 
+scrapy spiderdocs <module.name>
 ```
 
 See documented project for example.
@@ -81,9 +81,100 @@ Run the example spider:
 scrapy crawl example
 ```
 
+## Output options
+
+### stdout
+
+```bash
+scrapy spiderdocs <module.name> > somefile.md
+```
+
+### `-o` (`--output`) option
+
+```bash
+scrapy spiderdocs <module.name> -o somefile.md
+```
+
+### Settings
+
+```python
+SPIDERDOCS_LOCATIONS = {
+    'module.name': "somfile.md"
+}
+```
+
+The setting used if no module specified.
+```bash
+scrapy spiderdocs
+```
+
+## Docstring syntax
+
+Use `;` to create sections. For example:
+
+```text
+; Section 1
+
+Some text ...
+
+; Section 2
+
+Some text ...
+```
+
+Use `; end` to close a section:
+
+```text
+This text will not be added to the documentation.
+
+; Section 1
+
+Some text ...
+
+; end
+
+And this text also will be skipped.
+```
+
+### Section processors
+
+An example:
+```
+SPIDERDOCS_SECTION_PROCESSORS = {
+    'output': lambda i: '```json\n{i}\n```'.format(i=i)
+}
+```
+
+
+    ; Output
+    
+    {
+        "attr": "value"
+    }
+
+will be translated into:
+
+    ### Output
+    
+    ```json
+    {
+        "attr": "value"
+    }
+    ```
+
+## Development
+
+```
+git clone git@github.com:nanvel/scrapy-spiderdocs.git
+cd scrapy-spiderdocs
+virtualenv .env --no-site-packages -p /usr/local/bin/python3
+source .env/bin/activate
+pip install -r requirements.txt
+scrapy crawl example
+scrapy spiderdocs documented.spiders
+python -m unittest documented.tests
+```
+
 ## TODO
 
-- test on Python2.7
 - unittests
-- setup.py
-- docs
