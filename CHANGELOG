@@ -7,7 +7,13 @@ v 0.0.2
 - added CHANGELOG
 ---
 v 0.0.3
-README.md -> README.rst
+- README.md -> README.rst
 ---
 v 0.0.4
-README.rst fixes to show properly on PyPI
+- README.rst fixes to show properly on PyPI
+---
+v 0.1.0
+- fixed SpiderDocsSection
+- changed processors setting format
+- added module/location/number of spiders output
+- updated README

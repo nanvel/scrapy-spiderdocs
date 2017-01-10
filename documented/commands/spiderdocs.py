@@ -17,7 +17,7 @@ def get_line_indent(line):
     return matches and len(matches.groups()[0]) or 0
 
 
-class SpiderDocsSection:
+class SpiderDocsSection(object):
 
     _name = None
     _lines = []
@@ -25,20 +25,21 @@ class SpiderDocsSection:
     def __init__(self, name, processor=None):
         self._name = name
         self._processor = processor
+        self._lines = []
 
     def append(self, line):
         self._lines.append(line)
 
-    def to_md(self):
-        lines = '\n'.join(self._lines).strip()
-
-        if self._processor:
-            lines = self._processor(lines)
-
-        return "### {name}\n\n{lines}\n".format(
-            name=self._name,
-            lines=lines
+    def _default_processor(self, name, content):
+        return "### {name}\n\n{content}".format(
+            name=name,
+            content=content
         )
+
+    def to_md(self):
+        content = '\n'.join(self._lines).strip()
+        return (self._processor or self._default_processor)(name=self._name, content=content)
+
 
 class Command(ScrapyCommand):
 
@@ -46,7 +47,7 @@ class Command(ScrapyCommand):
     default_settings = {
         # {<module>: <destination>}
         'SPIDERDOCS_LOCATIONS': {},
-        # {<section_name>: <function>}
+        # {<section_name>: <function(name, content) -> str>}
         'SPIDERDOCS_SECTION_PROCESSORS': {},
         'LOG_ENABLED': False
     }
@@ -82,6 +83,8 @@ class Command(ScrapyCommand):
 
             output = ["# {module_name} spiders".format(module_name=module)]
 
+            spiders_count = 0
+
             for spider_name in self.crawler_process.spider_loader.list():
                 spider = self.crawler_process.spider_loader.load(spider_name)
 
@@ -93,6 +96,8 @@ class Command(ScrapyCommand):
                     module_name=spider.__module__,
                     class_name=spider.__name__
                 ))
+
+                spiders_count += 1
 
                 doc_lines = spider.__doc__.split('\n')
 
@@ -136,5 +141,12 @@ class Command(ScrapyCommand):
             if location:
                 with open(location, 'w') as f:
                     f.write(output)
+                print(
+                    "{module} -> {location} ({spiders_count} spiders)".format(
+                        module=module,
+                        location=location,
+                        spiders_count=spiders_count
+                    )
+                )
             else:
                 print(output)

@@ -10,7 +10,7 @@ class ExampleSpider(scrapy.Spider):
 
     Some note.
 
-    ; output
+    ; Output
 
     {
         "1": 1
@@ -25,3 +25,20 @@ class ExampleSpider(scrapy.Spider):
         yield {
             'body_length': len(response.body)
         }
+
+
+class ExampleSpider2(scrapy.Spider):
+    """Some text.
+    Hi!
+
+    ; Info
+
+    Some info.
+    """
+
+    name = 'example2'
+    allowed_domains = ('example.com',)
+    start_urls = ('http://example.com/',)
+
+    def parse(self, response):
+        yield {'success': True}

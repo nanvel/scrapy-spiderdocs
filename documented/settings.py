@@ -92,8 +92,9 @@ ROBOTSTXT_OBEY = True
 COMMANDS_MODULE = 'documented.commands'
 
 SPIDERDOCS_LOCATIONS = {
-    'documented.spiders.example': "docs/example.md"
+    'documented.spiders': "docs/example.md"
 }
 SPIDERDOCS_SECTION_PROCESSORS = {
-    'output': lambda i: '```json\n{i}\n```'.format(i=i)
+    'output': lambda name, content: '### {name}\n\n```json\n{content}\n```'.format(name=name, content=content),
+    'info': lambda name, content: '{content}'.format(content=content)
 }

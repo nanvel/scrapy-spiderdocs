@@ -28,7 +28,7 @@ See ``documented`` project for example.
 
         Some note.
 
-        ; output
+        ; Output
 
         {
             "1": 1
@@ -44,15 +44,31 @@ See ``documented`` project for example.
                 'body_length': len(response.body)
             }
 
+
+    class ExampleSpider2(scrapy.Spider):
+        """Some text.
+        Hi!
+
+        ; Info
+
+        Some info.
+        """
+
+        name = 'example2'
+        allowed_domains = ('example.com',)
+        start_urls = ('http://example.com/',)
+
+        def parse(self, response):
+            yield {'success': True}
+
+
 Settings:
 
 .. code-block:: python
 
-    SPIDERDOCS_LOCATIONS = {
-        'documented.spiders.example': "docs/example.md"
-    }
     SPIDERDOCS_SECTION_PROCESSORS = {
-        'output': lambda i: '```json\n{i}\n```'.format(i=i)
+        'output': lambda name, content: '### {name}\n\n```json\n{content}\n```'.format(name=name, content=content),
+        'info': lambda name, content: '{content}'.format(content=content)
     }
 
 Execute the command:
@@ -66,20 +82,20 @@ Output:
 .. code-block::
 
     # documented.spiders spiders
-    
+
+    ## example2 [documented.spiders.example.ExampleSpider2]
+
+    Some info.
+
     ## example [documented.spiders.example.ExampleSpider]
-    
+
     ### Note
-    
+
     Some note.
-    
-    
-    ### output
-    
+
+    ### Output
+
     ```json
-    Some note.
-    
-    
     {
         "1": 1
     }
@@ -154,7 +170,7 @@ An example:
 .. code-block:: python
 
     SPIDERDOCS_SECTION_PROCESSORS = {
-        'output': lambda i: '```json\n{i}\n```'.format(i=i)
+        'output': lambda name, content: '### {name}\n\n```json\n{content}\n```'.format(name=name, content=content)
     }
 
 .. code-block:: bash
@@ -182,7 +198,7 @@ Scrapy settings
 
 ``SPIDERDOCS_LOCATIONS: {<module>: <destination>}``, default: ``{}``.
 
-``SPIDERDOCS_SECTION_PROCESSORS: {<section_name>: <function>}``, default: ``{}``.
+``SPIDERDOCS_SECTION_PROCESSORS: {<section_name>: <function(name, content) -> str>}``, default: ``{}``.
 
 See usage examples above.
 
