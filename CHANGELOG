@@ -17,3 +17,6 @@ v 0.1.0
 - changed processors setting format
 - added module/location/number of spiders output
 - updated README
+---
+v 0.1.1
+- fixed exception when there is no docstring

@@ -85,10 +85,13 @@ class Command(ScrapyCommand):
 
             spiders_count = 0
 
-            for spider_name in self.crawler_process.spider_loader.list():
+            for spider_name in sorted(self.crawler_process.spider_loader.list()):
                 spider = self.crawler_process.spider_loader.load(spider_name)
 
                 if not spider.__module__.startswith(module):
+                    continue
+
+                if not spider.__doc__:
                     continue
 
                 output.append("## {spider_name} [{module_name}.{class_name}]".format(
