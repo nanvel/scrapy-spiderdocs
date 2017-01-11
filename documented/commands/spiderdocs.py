@@ -83,10 +83,13 @@ class Command(ScrapyCommand):
 
             output = ["# {module_name} spiders".format(module_name=module)]
 
-            spiders_count = 0
+            spiders_count_total = 0
+            spiders_count_documented = 0
 
             for spider_name in sorted(self.crawler_process.spider_loader.list()):
                 spider = self.crawler_process.spider_loader.load(spider_name)
+
+                spiders_count_total += 1
 
                 if not spider.__module__.startswith(module):
                     continue
@@ -94,13 +97,7 @@ class Command(ScrapyCommand):
                 if not spider.__doc__:
                     continue
 
-                output.append("## {spider_name} [{module_name}.{class_name}]".format(
-                    spider_name=spider.name,
-                    module_name=spider.__module__,
-                    class_name=spider.__name__
-                ))
-
-                spiders_count += 1
+                sections = []
 
                 doc_lines = spider.__doc__.split('\n')
 
@@ -120,7 +117,7 @@ class Command(ScrapyCommand):
 
                     if line.startswith(self.SECTION_PREFIX):
                         if current_section:
-                            output.append(current_section.to_md())
+                            sections.append(current_section.to_md())
 
                         section_name = line[len(self.SECTION_PREFIX):].strip()
                         if section_name.lower().strip() == self.SECTION_END:
@@ -137,7 +134,18 @@ class Command(ScrapyCommand):
                         current_section.append(line)
 
                 if current_section:
-                    output.append(current_section.to_md())
+                    sections.append(current_section.to_md())
+
+                if sections:
+                    output.append(
+                        "## {spider_name} ({class_name})".format(
+                            spider_name=spider.name,
+                            class_name=spider.__name__
+                        )
+                    )
+                    output.extend(sections)
+
+                    spiders_count_documented += 1
 
             output = '\n\n'.join(output)
 
@@ -145,10 +153,11 @@ class Command(ScrapyCommand):
                 with open(location, 'w') as f:
                     f.write(output)
                 print(
-                    "{module} -> {location} ({spiders_count} spiders)".format(
+                    "{module} -> {location} ({documented}/{total} spiders)".format(
                         module=module,
                         location=location,
-                        spiders_count=spiders_count
+                        total=spiders_count_total,
+                        documented=spiders_count_documented
                     )
                 )
             else:
