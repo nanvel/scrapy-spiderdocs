@@ -62,7 +62,13 @@ class Command(ScrapyCommand):
     def add_options(self, parser):
         parser.usage = "usage: scrapy spiderdocs [<module.name>] [-o <filename.md>]"
         ScrapyCommand.add_options(self, parser)
-        parser.add_option("-o", "--output", dest="output_filename", metavar="FILE", help="Output file name.")
+        parser.add_argument(
+            "-o",
+            "--output",
+            dest="output_filename",
+            metavar="FILE",
+            help="Output file name."
+        )
 
     def process_options(self, args, opts):
         ScrapyCommand.process_options(self, args, opts)
