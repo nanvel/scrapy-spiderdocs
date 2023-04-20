@@ -1,6 +1,27 @@
 Scrapy spiderdocs command
 =========================
 
+.. image:: https://img.shields.io/pypi/pyversions/scrapy-spiderdocs.svg
+   :target: https://pypi.python.org/pypi/scrapy-spiderdocs/
+   :alt: PyPI python versions
+
+.. image:: https://img.shields.io/pypi/l/scrapy-spiderdocs.svg
+   :target: https://pypi.python.org/pypi/scrapy-spiderdocs/
+   :alt: PyPI license
+
+.. image:: https://badge.fury.io/py/scrapy-spiderdocs.svg
+   :target: https://pypi.python.org/pypi/scrapy-spiderdocs/
+   :alt: PyPI version
+
+.. image:: https://img.shields.io/pypi/status/scrapy-spiderdocs.svg
+   :target: https://pypi.python.org/pypi/scrapy-spiderdocs/
+   :alt: PyPI status
+
+.. image:: https://img.shields.io/pypi/dm/scrapy-spiderdocs.svg
+   :target: https://pypi.python.org/pypi/scrapy-spiderdocs/
+   :alt: PyPI download month
+
+
 Usage example
 -------------
 
@@ -176,7 +197,7 @@ An example:
 .. code-block:: bash
 
     ; Output
-    
+
     {
         "attr": "value"
     }
@@ -186,7 +207,7 @@ will be translated into:
 .. code-block::
 
     ### Output
-    
+
     ```json
     {
         "attr": "value"
